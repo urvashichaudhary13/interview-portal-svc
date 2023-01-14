@@ -1,0 +1,22 @@
+{
+  "name": "interview-portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urvashichaudhary13/interview-portal-svc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/urvashichaudhary13/interview-portal-svc/issues"
+  },
+  "homepage": "https://github.com/urvashichaudhary13/interview-portal-svc#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
