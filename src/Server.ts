@@ -1,7 +1,7 @@
 import * as express from "express";
 import Swagger from "./libs/Swagger";
 import router from "./router";
-
+import "./Database";
 
 const port = 3006
 const env = "local";
@@ -20,12 +20,8 @@ export default class Server {
  * @memberof Server
  */
   public setupRoutes() {
-    // mount /health-check
-    this.app.use('/health-check', (req, res) => {
-      res.send('I am OK');
-    });
-
     // mount all routes on /api path
+    this.app.use(express.json());
     this.app.use('/api', router);
   }
 

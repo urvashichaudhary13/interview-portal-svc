@@ -1,5 +1,5 @@
 export const SWAGGER_INFO = {
-    description: 'APIs used in Interview Feedback Portal ',
+    description: 'Interview Feedback Portal API with Swagger',
     title: 'Interview Feedback Portal',
   };
 
