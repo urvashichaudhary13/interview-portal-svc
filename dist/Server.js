@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const Swagger_1 = require("./libs/Swagger");
 const router_1 = require("./router");
+const errorHandler_1 = require("./libs/errorHandler");
 require("./Database");
 const port = 3006;
 const env = "local";
@@ -20,6 +21,7 @@ class Server {
         // mount all routes on /api path
         this.app.use(express.json());
         this.app.use('/api', router_1.default);
+        this.app.use(errorHandler_1.errorHandler);
     }
     /**
      * To enable all the setting on our express app

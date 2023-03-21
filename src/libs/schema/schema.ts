@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
 
-const candidateSchema = new mongoose.Schema({
+const users = new mongoose.Schema({
     name: {
         type:String,
-        require: true,
+        required: true,
     },
     email: {
+        unique:true,
         type:String,
-        require: true,
+        required: true,
     },
+    password: {
+        type: String,
+        // required: true,
+    }
 })
 
-export const Candidate = mongoose.model("Candidate", candidateSchema)
+export const Users = mongoose.model("Users", users)
