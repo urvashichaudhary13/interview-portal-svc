@@ -8,6 +8,7 @@
         "noLib": false,
         "outDir": "./dist",
         "skipLibCheck": true,
+        "esModuleInterop": true
     },
     "include": [
         "**/*"

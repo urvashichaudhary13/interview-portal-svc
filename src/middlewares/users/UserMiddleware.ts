@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { Users } from '../../libs/schema/schema';
+import { Users } from '../../repositories/users/UsersModel';
 
 
 class UserMiddleware {

@@ -1,6 +1,7 @@
-import * as express from "express";
+import express from "express";
 import Swagger from "./libs/Swagger";
 import router from "./router";
+import cors from "cors";
 import { errorHandler } from "./libs/errorHandler";
 import "./Database";
 
@@ -23,6 +24,7 @@ export default class Server {
   public setupRoutes() {
     // mount all routes on /api path
     this.app.use(express.json());
+    this.app.use(cors());
     this.app.use('/api', router);
     this.app.use(errorHandler)
   }

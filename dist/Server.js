@@ -1,15 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const Swagger_1 = require("./libs/Swagger");
-const router_1 = require("./router");
+const express_1 = __importDefault(require("express"));
+const Swagger_1 = __importDefault(require("./libs/Swagger"));
+const router_1 = __importDefault(require("./router"));
+const cors_1 = __importDefault(require("cors"));
 const errorHandler_1 = require("./libs/errorHandler");
 require("./Database");
 const port = 3006;
 const env = "local";
 class Server {
     constructor() {
-        this.app = express();
+        this.app = (0, express_1.default)();
     }
     /**
    * This will Setup all the routes in the system
@@ -19,7 +23,8 @@ class Server {
    */
     setupRoutes() {
         // mount all routes on /api path
-        this.app.use(express.json());
+        this.app.use(express_1.default.json());
+        this.app.use((0, cors_1.default)());
         this.app.use('/api', router_1.default);
         this.app.use(errorHandler_1.errorHandler);
     }
