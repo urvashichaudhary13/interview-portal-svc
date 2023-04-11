@@ -26,7 +26,7 @@ router.get('/health-check', (req: any, res) => {
 
 /**
  * @swagger
- * /users:
+ * /users/signup:
  *   post:
  *     tags:
  *       - User
@@ -92,20 +92,16 @@ router.get('/health-check', (req: any, res) => {
  *               example: "Internal Server Error"
  * 
  */
-router.route('/users')
-.post(
-  ...validationHandler(validations.users as any),
-  UserMiddleware.getUsers,
-)
+router.route('/users/signup')
+  .post(
+    ...validationHandler(validations.users as any),
+    UserMiddleware.createUser,
+  )
 
-
-// router.route('/roles')
-// .post(
-//   ...validationHandler(validations.roles as any),
-//   (req,res,next) => {
-//     console.log("-----------------------------------------------------")
-//   },
-//   RolesMiddleware.updateRoles,
-// )
+router.route('/users/login')
+  .post(
+    ...validationHandler(validations.loginuser as any),
+    UserMiddleware.getLoginUser,
+  )
 
 export default router;
