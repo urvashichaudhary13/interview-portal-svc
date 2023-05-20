@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { validationHandler } from "./libs/validationHandler";
 import { validations } from './validations';
-import { UserMiddleware, RolesMiddleware } from './middlewares';
+import { UserMiddleware, RolesMiddleware, CandidateMiddleware } from './middlewares';
 
 
 const router = Router();
@@ -26,7 +26,7 @@ router.get('/health-check', (req: any, res) => {
 
 /**
  * @swagger
- * /users:
+ * /users/signup:
  *   post:
  *     tags:
  *       - User
@@ -92,20 +92,36 @@ router.get('/health-check', (req: any, res) => {
  *               example: "Internal Server Error"
  * 
  */
-router.route('/users')
+router.route('/users/signup')
+  .post(
+    ...validationHandler(validations.users as any),
+    UserMiddleware.createUser,
+  )
+
+router.route('/users/login')
+  .post(
+    ...validationHandler(validations.loginuser as any),
+    UserMiddleware.getLoginUser,
+  )
+
+router.route('/candidate')
 .post(
-  ...validationHandler(validations.users as any),
-  UserMiddleware.getUsers,
+  CandidateMiddleware.createCandidate,
 )
 
+router.route('/candidate')
+.get(
+  CandidateMiddleware.getCandidates,
+)
 
-// router.route('/roles')
-// .post(
-//   ...validationHandler(validations.roles as any),
-//   (req,res,next) => {
-//     console.log("-----------------------------------------------------")
-//   },
-//   RolesMiddleware.updateRoles,
-// )
+router.route('/candidate/:id')
+.delete(
+  CandidateMiddleware.removeUser
+)
+
+router.route('/candidate')
+.put(
+  CandidateMiddleware.updateUser
+)
 
 export default router;
