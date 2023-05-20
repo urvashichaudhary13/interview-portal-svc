@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import mongoose from "mongoose";
 import { Users } from '../../repositories/users/UsersModel';
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
@@ -16,7 +17,12 @@ class UserMiddleware {
       if (isExisting) {
         return res.status(400).json({ error: 'Data already exists' });
       }
-      const userResponse = new Users(req.body);
+      const id = new mongoose.Types.ObjectId();
+      let userResponse = new Users({
+        ...req.body,
+        userId: id
+
+      });
       const insertCandidateRecords = await userResponse.save();
       res.send(insertCandidateRecords);
     } catch (e) {
@@ -40,9 +46,6 @@ class UserMiddleware {
       const secretKey = 'mySecretKey';
 
       const token = jwt.sign({ _id: user }, secretKey, { expiresIn: '1h' });
-      const tokenHeaders = {
-        authorization: token,
-      }
       res.status(200).json(token);
     } catch (err) {
       res.status(400).send(err);

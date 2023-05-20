@@ -26,6 +26,7 @@ const users = new mongoose.Schema({
     },
     userId: {
         type: String,
+        // required:true,
     }
 })
 users.pre('save', function(next) {

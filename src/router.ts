@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { validationHandler } from "./libs/validationHandler";
 import { validations } from './validations';
-import { UserMiddleware, RolesMiddleware } from './middlewares';
+import { UserMiddleware, RolesMiddleware, CandidateMiddleware } from './middlewares';
 
 
 const router = Router();
@@ -103,5 +103,25 @@ router.route('/users/login')
     ...validationHandler(validations.loginuser as any),
     UserMiddleware.getLoginUser,
   )
+
+router.route('/candidate')
+.post(
+  CandidateMiddleware.createCandidate,
+)
+
+router.route('/candidate')
+.get(
+  CandidateMiddleware.getCandidates,
+)
+
+router.route('/candidate/:id')
+.delete(
+  CandidateMiddleware.removeUser
+)
+
+router.route('/candidate')
+.put(
+  CandidateMiddleware.updateUser
+)
 
 export default router;
