@@ -20,7 +20,7 @@ export class CandidateMiddleware {
             }
             const candidateRes = new Candidates(body);
             const insertcandidate = await candidateRes.save();
-            res.send(insertcandidate);
+            res.status(200).send(insertcandidate);
         } catch(err) {
           res.status(400).send(err)
         }

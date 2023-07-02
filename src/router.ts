@@ -100,17 +100,158 @@ router.route('/users/signup')
 
 router.route('/users/login')
   .post(
-    ...validationHandler(validations.loginuser as any),
-    UserMiddleware.getLoginUser,
+    // ...validationHandler(validations.loginuser as any),
+    // UserMiddleware.getLoginUser,
   )
 
+/**
+ * @swagger
+ * /candidate:
+ *   post:
+ *     security:
+ *       - Bearer: []
+ *     tags:
+ *       - Candidate
+ *     description: Create candidate
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     - name: name
+ *       description: name of candidate.
+ *       in: body
+ *       type: string
+ *       required: true
+ *       example: Joey
+ *     - name: email
+ *       description: email of candidate.
+ *       in: body
+ *       type: string
+ *       required: true
+ *       example: joey@gmail.com
+ *     - name: jobProfile
+ *       description: Profile for which candidate has applied
+ *       in: body
+ *       required: true
+ *       type: string
+ *       example: "joey@gmail.com"
+ *     - name: experience
+ *       description: Total experience of candidate
+ *       in: body
+ *       type: integer
+ *       required: true
+ *       example: 2
+ *     responses:
+ *       200:
+ *         description:  Array of candidates
+ *         schema:
+ *           type: array
+ *           items:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: 6469292be84cee7bb661f7e5
+ *                 name:
+ *                   type: string
+ *                   example: Joey
+ *                 email:
+ *                   type: string
+ *                   example: joey@gmail.com
+ *                 experience:
+ *                   type: number
+ *                   example: 2
+ *                 jobProfile:
+ *                   type: string
+ *                   example: React Developer
+ *                 status:
+ *                   type: string
+ *                   example: Selected
+ *                 department:
+ *                   type: string
+ *                   example: Node 
+ *                 feedbacks:
+ *                   type: string
+ *                   example: Good knowledge of React       
+ *       400:
+ *         description: Bad Request
+ *         schema:
+ *           type: object
+ *           items:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   example: 400
+ *                 message:
+ *                   type: string
+ *                   example: No data in collection
+ */
 router.route('/candidate')
 .post(
+  ...validationHandler(validations.createCandidate),
   CandidateMiddleware.createCandidate,
 )
 
+/**
+ * @swagger
+ * /candidate:
+ *   get:
+ *     security:
+ *       - Bearer: []
+ *     tags:
+ *       - Candidate
+ *     description: Get candidate data
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description:  Array of candidates
+ *         schema:
+ *           type: array
+ *           items:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: 6469292be84cee7bb661f7e5
+ *                 name:
+ *                   type: string
+ *                   example: Joey
+ *                 email:
+ *                   type: string
+ *                   example: joey@gmail.com
+ *                 experience:
+ *                   type: number
+ *                   example: 2
+ *                 jobProfile:
+ *                   type: string
+ *                   example: React Developer
+ *                 status:
+ *                   type: string
+ *                   example: Selected
+ *                 department:
+ *                   type: string
+ *                   example: Node 
+ *                 feedbacks:
+ *                   type: string
+ *                   example: Good knowledge of React       
+ *       400:
+ *         description: Bad Request
+ *         schema:
+ *           type: object
+ *           items:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   example: 400
+ *                 message:
+ *                   type: string
+ *                   example: No data in collection
+ */
 router.route('/candidate')
 .get(
+  ...validationHandler(validations.getCandidates),
   CandidateMiddleware.getCandidates,
 )
 
